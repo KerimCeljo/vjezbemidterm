@@ -8,6 +8,9 @@ Flight::route('GET /connection-check', function(){
     * Goal is to check whether connection is successfully established or not
     * This endpoint does not have to return output in JSON format
     */
+    //echo 'hello connection-check';
+    $result = new MidtermDao();
+
 });
 
 Flight::route('GET /cap-table', function(){
@@ -19,22 +22,23 @@ Flight::route('GET /cap-table', function(){
     * Outpus is given in figure 2
     * This endpoint should return output in JSON format
     */
-    /*
-     $midterm_dao = new MidtermDao();
-     $results = $midterm_dao ->cap_table();
+    
+     //$midterm_dao = new MidtermDao();
+     $results = new MidtermService();
      //print_r($results);
-     Flight::json($results);
-*/
+     Flight::json($results->cap_table());
+
+
+
 
 });
 
-Flight::route('GET /summary', function($summary){
+Flight::route('GET /summary', function(){
     /** TODO
     * This endpoint returns summary of the cap-table, that is total number of investors and total number of diluted shares
     * Output is given in figure 3
     * This endpoint should return output in JSON format
     */
-
     $midterm_dao = new MidtermDao();
     $results = $midterm_dao ->summary();
     //print_r($results);
@@ -48,7 +52,6 @@ Flight::route('GET /investors', function(){
     * This endpoint should return output in JSON format
     */
 
-    
     $midterm_dao = new MidtermDao();
     $results = $midterm_dao ->investors();
     //print_r($results);

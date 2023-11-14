@@ -8,6 +8,8 @@ class MidtermDao {
     * constructor of dao class
     */
     public function __construct(){
+
+      
         try {
 
         /** TODO
@@ -16,7 +18,7 @@ class MidtermDao {
         $servername = "localhost";
         $username = "root";
         $password = "root";
-        $schema = "web-project";
+        $schema = "vjezbemidterm";
 
         /*options array neccessary to enable ssl mode - do not change*/
         $options = array(
@@ -32,10 +34,11 @@ class MidtermDao {
           $this->conn = new PDO("mysql:host=$servername;dbname=$schema", $username, $password, $options);
         // set the PDO error mode to exception
           $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          echo "Connected successfully";
+          echo "Connected successfully form constructor";
         } catch(PDOException $e) {
           echo "Connection failed: " . $e->getMessage();
         }
+        
     }
 
     /** TODO
@@ -53,7 +56,10 @@ class MidtermDao {
     * Implement DAO method used to get summary
     */
     public function summary(){
-      $stmt = $this->conn->prepare("SELECT  FROM cap_table");
+      $stmt = $this->conn->prepare("SELECT investor_id, SUM(diluted_shares) AS total
+      FROM cap_table cp
+      GROUP BY investor_id;"
+      );
       $stmt->execute();
       return $stmt->fetchAll(PDO::FETCH_ASSOC);      
 
@@ -65,7 +71,7 @@ class MidtermDao {
     */
     public function investors(){
 
-      $stmt = $this->conn->prepare("SELECT  FROM investors");
+      $stmt = $this->conn->prepare("SELECT i.id,i.first_name, SUM(diluted_shares) AS total FROM investors i LEFT JOIN cap_table ct ON i.id= ct.investor_id GROUP BY i.first_name, i.id");
       $stmt->execute();
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
 

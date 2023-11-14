@@ -9,9 +9,13 @@ class MidtermService {
     }
 
     /** TODO
-    * Implement service method to return detailed cap-table
+    * Implement service method  to return detailed cap-table
     */
     public function cap_table(){
+        $results = $this->dao->cap_table();
+        //print_r($results);
+        return $results;
+        //Flight::json($results);
 
     }
 
