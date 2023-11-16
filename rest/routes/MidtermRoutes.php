@@ -10,6 +10,8 @@ Flight::route('GET /connection-check', function(){
     */
     //echo 'hello connection-check';
     $result = new MidtermDao();
+  // $result = new MidtermDao();
+  // print_r($result);
 
 });
 
@@ -39,10 +41,14 @@ Flight::route('GET /summary', function(){
     * Output is given in figure 3
     * This endpoint should return output in JSON format
     */
+    /*
     $midterm_dao = new MidtermDao();
     $results = $midterm_dao ->summary();
     //print_r($results);
     Flight::json($results);
+    */
+    $result = new MidtermService();
+    Flight::json($result->summary());
 });
 
 Flight::route('GET /investors', function(){
@@ -51,11 +57,14 @@ Flight::route('GET /investors', function(){
     * Output is given in figure 4
     * This endpoint should return output in JSON format
     */
-
+    /*
     $midterm_dao = new MidtermDao();
     $results = $midterm_dao ->investors();
     //print_r($results);
     Flight::json($results);
+    */
+    $results = new MidtermService();
+    Flight::json($results->investors());
 });
 
 ?>

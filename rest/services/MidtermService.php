@@ -23,6 +23,8 @@ class MidtermService {
     * Implement service method to return cap-table summary
     */
     public function summary(){
+        $results = $this->dao->summary();
+        return $results;
 
     }
 
@@ -30,6 +32,9 @@ class MidtermService {
     * Implement service method to return list of investors with their total shares amount
     */
     public function investors(){
+
+        $results = $this->dao->investors();
+        return $results;
 
     }
 }
